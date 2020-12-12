@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <title>클러스터 마커에 텍스트 표시하기</title>
+
+</head>
+<body>
+    <p th:text="${user.profile.nickname}+'님, 안녕하세요.'"> </p>
+    <img th:src="${user.profile.thumbnail_image_url}" alt="">
+    <img th:src="${user.profile.profile_image_url}" alt="">
+    <form th:action="@{/send}" th:object="${account}" method="post">
+        <div class="form-group mt-1 mb-5">
+            <label for="content">메세지</label>
+            <textarea rows="10" cols="40" class="form-control" id="content" th:field="*{message}"></textarea>
+        </div>
+        <button type="submit" th:text="보내기" class="btn btn-primary"></button>
+    </form>
+<!-- Option 1: Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.js" integrity="sha256-DrT5NfxfbHvMHux31Lkhxg42LY6of8TaYyK50jnxRnM=" crossorigin="anonymous"></script>
+    <script>
+        Kakao.API.request({
+          url: '/v2/api/talk/memo/default/send',
+          data: {
+            template_object: {
+              object_type: 'feed',
+              content: {
+                title: '카카오톡 링크 4.0',
+                description: '디폴트 템플릿 FEED',
+                image_url:
+                  'http://mud-kage.kakao.co.kr/dn/Q2iNx/btqgeRgV54P/VLdBs9cvyn8BJXB3o7N8UK/kakaolink40_original.png',
+                link: {
+                  web_url: 'https://developers.kakao.com',
+                  mobile_web_url: 'https://developers.kakao.com',
+                },
+              },
+              social: {
+                like_count: 100,
+                comment_count: 200,
+              },
+              button_title: '바로 확인',
+            },
+          },
+          success: function(response) {
+            console.log(response);
+          },
+          fail: function(error) {
+            console.log(error);
+          },
+        });
+    </script>
+</body>
+</html>
