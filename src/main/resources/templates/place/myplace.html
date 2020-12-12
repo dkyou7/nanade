@@ -9,7 +9,7 @@
     <p th:text="${user.profile.nickname}+'님, 안녕하세요.'"> </p>
     <img th:src="${user.profile.thumbnail_image_url}" alt="">
     <img th:src="${user.profile.profile_image_url}" alt="">
-    <form th:action="@{/send}" th:object="${account}" method="post">
+    <form th:action="@{/send}" th:object="${messageForm}" method="post">
         <div class="form-group mt-1 mb-5">
             <label for="content">메세지</label>
             <textarea rows="10" cols="40" class="form-control" id="content" th:field="*{message}"></textarea>
